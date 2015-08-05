@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //颠倒数组
+    var a =[1,2,3];
+   var ad = a.reverse();
+    alert(ad);
+    //把颠倒的数组转为字符串
+    a.reverse().join();
+    //将数组中的元素排序并返回排序后的数组
+    var b = new Array("banana","cherry","apple","aaaa","apyyy");
+    b.sort();
+    var c = [33,4,1111,222];
+    c.sort();
+    console.log(c.sort());
+    c.sort(function(a,b){
+        return a-b;
+    });
+    console.log( c.sort(function(a,b){
+        return a-b;
+    }));
+    c.sort(function(a,b){return b-a})
+    console.log( c.sort(function(a,b){return b-a}))
+    //更复杂
+    d = ['ant','Bug','cat','Dog'];
+    d.sort();
+    console.log(d.sort());
+    d.sort(function(s,t){
+        var a = s.toLowerCase();
+        var b = t.toLowerCase();
+        if(a<b) return -1;
+        if(a>b) return 1;
+    })
+
+    //concat()创建并返回一个新数组
+    var f = [1,2,3];
+    f.concat(4,5);   //返回[1,2,3,4,5]
+    f.concat([4,5],[6,7]);//返回[1,2,3,4,5,6,7]
+    f.concat(4,[5,[6,7]]);//返回[1,2,3,4,5,[6,7]]
+
+    //slice()返回指定数组的一个片段或子数组
+    
+</script>
+</body>
+</html>

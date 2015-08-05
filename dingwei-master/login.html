@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title></title>
+    <style>
+        *{margin: 0; padding: 0;}
+        input[type='number'] {
+            -moz-appearance:textfield;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .inp{width: 80%; height: 3rem;line-height:3rem;border: 1px solid #cccccc;box-shadow: 0px 3px 10px -3px #b2b2b2 inset;border-radius: 4px;margin: 20px auto;
+        }
+        .inp img{ margin-left: 10px; }
+        .inp b{font-weight: 400; margin-left: 10px;color: #e1e1e1;font-size: 13px;}
+        input{border: none;outline: none; margin-left: 5px;height: 2rem; width: 70%;}
+        .sub{width: 70%;height: 3rem;background-image: -webkit-linear-gradient(bottom, rgba(195,227, 127, 1) 0%, rgba(174,203,113, 1) 100%);background-image: -moz-linear-gradient(bottom, rgba(195,227, 127, 1) 0%, rgba(174,203,113, 1) 100%);border: none;margin-left:15%;color: #fff;}
+        .login{ ; width: 100%; height: auto;position: absolute}
+    </style>
+</head>
+<body>
+<div class="login" id="login">
+    <form action="">
+      <p class="inp"><img src="41.png" alt=""/><b>账号</b><input type="text"/></p>
+      <p class="inp"><img src="3.png"  style="margin-top:15px;" alt=""/><b style="margin-left: 18px;;">密码</b><input type="text"/></p>
+      <button class="sub" type="submit">登陆</button>
+    </form>
+</div>
+<script>
+    var sWidth = document.body.offsetWidth;
+    var wHeight = document.documentElement.clientHeight;
+
+    var log = document.getElementById('login');
+    var lHeight = log.offsetHeight;
+    var lWidth = log.offsetWidth;
+    log.style.left = sWidth / 2 - lWidth / 2 + 'px';
+    log.style.top = wHeight / 2 - lHeight / 2 + 'px';
+
+</script>
+</body>
+</html>

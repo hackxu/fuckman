@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas绘制图像</title>
+</head>
+<body>
+<img id="images" src="21_列表详情.png" alt=""/>
+<canvas id="huahua" width="1920" height="1080" style="border: 1px solid #ccc;">
+
+</canvas>
+<script type="text/javascript">
+    var hua = document.getElementById('huahua');
+  //  if (hua.getContext) {
+        var con = hua.getContext('2d');
+        var img = document.getElementById('images');
+        //con.drawImage(img,10,10);
+
+      // con.drawImage(img,0,10,50,50,0,100,40,60);
+    preImage('21_列表详情.png',function(){
+        con.drawImage(this,500,10,20,20)
+    });
+    preImage('21_列表详情.png',function(){
+        con.drawImage(this,10,10,500,500)
+    });
+ //   console.log(img)
+    function preImage(url,callback){
+        var img = new Image(); //创建一个Image对象，实现图片的预下载
+        img.src = url;
+
+        if(img.complete){ //如果图片已经存在于浏览器缓存，直接调用回调函数
+            callback.call(img);
+            return; //直接返回，不再处理onload事件
+        }
+        img.onload = function (){ //图像下载完毕时异步调用callback函数
+            callback.call(img);//将回调函数的this替换为Image对象
+        }
+    }
+</script>
+</body>
+</html>

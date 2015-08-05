@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<canvas id="draw" width="5000" height="5000">sdfasd</canvas>
+
+<script>
+    var draw = document.getElementById('draw');
+    if (draw.getContext) {
+        var dcontext = draw.getContext('2d');
+        dcontext.fillStyle = "#ff0000";
+        dcontext.save();
+
+        dcontext.fillStyle = "#ccc";
+        dcontext.translate(500, 500);
+        dcontext.save();
+
+        dcontext.fillStyle = "#8d8d8d";
+        dcontext.fillRect(0, 0, 100, 200);//从点（100，100）开始绘制蓝色矩形
+
+          dcontext.restore();
+        dcontext.fillRect(10, 10, 100, 200);//从点（110，110）开始绘制绿色矩形
+
+         dcontext.restore();
+        dcontext.fillRect(0, 0, 100, 200);//从点（0，0）开始绘制红色矩形
+    }
+</script>
+</body>
+</html>

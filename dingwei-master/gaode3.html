@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html style="height:100%;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, minimal-ui"/>
+    <title>高德地图JavaScript API</title>
+    <script src="jquery-1.11.1.min.js"></script>
+</head>
+<style type="text/css" rel="stylesheet">
+    header { position: absolute; height: 60px; top: 0; width: 100%; background-color: #F4F4F4; z-index: 999; text-align: center; line-height: 60px; color: #666666; font-weight: bold; border-bottom: 1px solid #BBBBBB; }
+
+    header div:nth-child(1) { position: absolute; z-index: 1000; width: 40px; cursor: pointer; }
+
+    header div:nth-child(1) img { width: 40px; height: 40px; margin-left: 3px; margin-top: 10px; }
+
+    header div:nth-child(2) { width: 100% }
+
+    html body { height: 100%; margin: 0; font-family: "微软雅黑"; }
+
+    #map { position: relative; top: 0px; width: 100%; font-family: "微软雅黑"; }
+
+    .float_div { cursor: pointer; border-radius: 3px; text-align: center; display: none; line-height: 50px; background-color: #008CFF; width: 80%; height: 45px; position: absolute; z-index: 888; color: #fff; }
+
+    #localtion { bottom: 20px; right: 10%; }
+
+    #panner { background-color: #272822; opacity: 0.8; width: 100%; height: 80px; position: absolute; bottom: 0; z-index: 17; font-size: 12px; color: #fff; }
+
+    #visit { bottom: 20px; }
+
+    #res { height: 50px; width: 200px; }
+
+    #time { height: 1rem; }
+
+    #result { position: absolute; z-index: 999; width: 80%; height: 200px; overflow: hidden; background: #0D9BF2;}
+    #result p{width: 85%; height: auto; overflow: hidden;margin:  0 10px;color: #fff; margin-top: 20px;}
+</style>
+<body>
+
+
+<div class="float_div" id="localtion">
+    签到
+</div>
+<!--<div class="float_div" id="visit">-->
+<!--监控-->
+<!--</div>-->
+<div id="result" style="visibility: hidden;">
+</div>
+<div id="result1" style="display:none;"></div>
+
+<div id="panner">
+    <form action="">
+        <input type="hidden" class="jing" value=""/>
+        <input type="hidden" class="wei" value=""/>
+        <button class="sub" id="sub" style="display: none" type="submit"></button>
+    </form>
+</div>
+
+<div id="map"></div>
+</body>
+<script language="javascript" src="http://webapi.amap.com/maps?v=1.3&key=bdcc81658692dadc4eb399762de17a78"></script>
+<script type="text/javascript">
+
+    (function () {
+        var t;
+        var mapHeight = document.body.clientHeight - 80;
+        var res = document.getElementById('res');
+        document.getElementById('map').style.height = mapHeight + 'px';
+        var map = new AMap.Map('map'), geolocation = null, result = document.getElementById('result');
+        map.plugin('AMap.Geolocation', function () {
+            geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+                maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+                convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+                showButton: true,        //显示定位按钮，默认：true
+                buttonPosition: 'LB',    //定位按钮停靠位置，默认：'LB'，左下角
+                buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+                showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+                panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+                zoomToAccuracy: true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+            });
+            map.addControl(geolocation);
+            AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+            AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+        });
+
+        /*
+         *获取当前位置信息
+         */
+        function getCurrentPosition() {
+            geolocation.getCurrentPosition();
+        };
+        /*
+         *监控当前位置并获取当前位置信息
+         */
+        function watchPosition() {
+            geolocation.watchPosition();
+        };
+
+            /*
+             *解析定位结果
+             */
+        var jd,wd,dizhi;
+        function onComplete(data) {
+            var getti = new Date();
+            dizhi = $('#result1').text();
+            jd = data.position.getLng();
+            wd = data.position.getLat();
+            var str = '<p style="display:none;">定位成功</p>';
+            str += '<p id="jing" style="display:none;">' + data.position.getLng() + '</p>';
+            str += '<p id="wei" style="display:none;">' + data.position.getLat() + '</p>';
+            str += '<p id="time"  >当前时间:&nbsp;&nbsp; ' + getti.getMonth() + '月' + getti.getDate() + '日' + getti.getHours() + '时' + getti.getMinutes() + '分' + "</p>";
+            str += '<p>'+ dizhi+ "</p>";
+            str += '<p onclick="close1()" style="position: absolute;bottom: 10px;text-align: center" >确定' + "</p>";
+
+            result.innerHTML = str;
+
+        };
+        //加点
+
+
+        /*
+         *解析定位错误信息
+         */
+        function onError(data) {
+            var str = '<p>定位失败</p>';
+            str += '<p>错误信息：'
+            switch (data.info) {
+                case 'PERMISSION_DENIED':
+                    str += '浏览器阻止了定位操作';
+                    break;
+                case 'POSITION_UNAVAILBLE':
+                    str += '无法获得当前位置';
+                    break;
+                case 'TIMEOUT':
+                    str += '定位超时';
+                    break;
+                default:
+                    str += '未知错误';
+                    break;
+            }
+            str += '</p>';
+            result.innerHTML = str;
+        };
+
+        function tex() {
+            var stt = $('#jing').text();
+            var ste = $('#wei').text();
+            if (stt.length > 0 && ste.length > 0) {
+                $('.jing').val(stt);
+                $('.wei').val(ste);
+                watchPosition();
+                if(dizhi.length>0){
+                    $('#localtion').show();
+                    clearTimeout(t);
+                }
+                geocoder();
+
+            }
+
+        }
+
+
+        window.onload = function () {
+            // alert($('#jing'.text().length)
+            getCurrentPosition();
+            //  tex();
+            t = setInterval(tex, 1000)
+        };
+
+        var map = new AMap.Map("mapContainer", {
+            resizeEnable: true,
+            view: new AMap.View2D({
+                zoom:13 //地图显示的缩放级别
+            })
+        });
+
+        //已知点坐标
+
+
+        function geocoder() {
+            var lnglatXY = new AMap.LngLat(jd,wd);
+
+            var MGeocoder;
+            //加载地理编码插件
+            AMap.service(["AMap.Geocoder"], function() {
+                MGeocoder = new AMap.Geocoder({
+                    radius: 1000,
+                    extensions: "all"
+                });
+                //逆地理编码
+                MGeocoder.getAddress(lnglatXY, function(status, result){
+                    if(status === 'complete' && result.info === 'OK'){
+                        geocoder_CallBack(result);
+                    }
+                });
+            });
+            //加点
+            var marker = new AMap.Marker({
+                map:map,
+                icon: new AMap.Icon({
+                    image: "http://webapi.amap.com/images/0.png",
+                    size:new AMap.Size(58,30),
+                    imageOffset: new AMap.Pixel(-32, -0)
+                }),
+                position: lnglatXY,
+                offset: new AMap.Pixel(-5,-30)
+            });
+            map.setFitView();
+        }
+
+        //回调函数
+        function geocoder_CallBack(data) {
+            var resultStr = "";
+            var poiinfo="";
+            var address;
+            //返回地址描述
+            address = data.regeocode.formattedAddress;
+           // alert('11')
+            resultStr = "<p >"+"<b>地址</b>："+ address  +"</p>";
+            document.getElementById("result1").innerHTML = resultStr;
+        }
+    })();
+
+
+    document.getElementById('localtion').onclick = function () {
+        document.getElementById('result').style.visibility = "visible";
+//        $.ajax({
+//            type:'POST',
+//            url:'',
+//            data:''
+//        })
+
+    };
+
+    var sWidth = document.body.offsetWidth;
+    var wHeight = document.documentElement.clientHeight;
+
+    var resu = document.getElementById('result');
+    var rHeight = resu.offsetHeight;
+    var rWidth = resu.offsetWidth;
+    resu.style.left = sWidth / 2 - rWidth / 2 + 'px';
+    resu.style.top = wHeight / 2 - rHeight / 2 + 'px';
+    function close1() {
+        document.getElementById('result').style.visibility = "hidden";
+    }
+    ;
+
+
+
+</script>
+</html>						
+
+	

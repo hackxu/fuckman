@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>javascript events</title>
+    <style type="text/css">
+        p { width: 200px; }
+    </style>
+    <!--[if It IE 9]>
+    <script src="../js/html5.js"></script><![endif]-->
+    <script src="../js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <h1>JavaScript Events</h1>
+
+    <h2>Click events</h2>
+    <button id="click-trigger">Click me</button>
+    <h2>Mouseover events</h2>
+
+    <p>Move your mouse over this paragraph</p>
+    <script type="text/javascript">
+        $(function(){
+            $('#click-trigger').click(function(){
+                alert('You triggered the click event')
+            });
+            $('p').mouseover(function(){
+                alert('You triggered the mouseover event')
+            });
+        })
+    </script>
+</body>
+</html>

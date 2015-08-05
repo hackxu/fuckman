@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<canvas id="drawing" width="500" height="500"> A drawing of something</canvas>
+<script>
+    var drawing = document.getElementById('drawing');
+    //确认浏览器支持<canvas>元素
+    if(drawing.getContext){
+        var context = drawing.getContext('2d');
+       context.strokeStyle = 'red';
+        context.fillStyle = "#0000ff";
+        //绘制红色矩形
+        context.fillStyle="#ff0000";
+        context.fillRect(10,10,50,50);
+        //绘制半透明的蓝色矩形
+        context.fillStyle = "rgba(0,0,255,0.4)";
+        context.fillRect(30,30,50,50);
+        //绘制红色描边矩形
+        context.strokeStyle='#ff0000';
+        context.strokeRect(100,100,50,50);
+        //绘制半透明的蓝色描边矩形
+        context.strokeStyle = "rgba(0,0,255,0.5)";
+        context.strokeRect(130,130,50,50)
+        //清除矩形
+        context.clearRect(40,40,10,10);
+
+
+        //时钟
+        //开始路径
+        context.beginPath();
+        //绘制外圆
+        context.arc(200,200,99,0,2*Math.PI,false);
+        //绘制内圈
+        context.moveTo(294,200);
+        context.arc(200,200,94,0,2*Math.PI,false);
+        //绘制分针
+        context.moveTo(200,200);
+        context.lineTo(200,115);
+
+        //绘制时针
+        context.moveTo(200,200);
+        context.lineTo(135,200);
+        //绘制数字
+        context.font = "bold 14px Arial";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText("12",200,120);
+        //描边路径
+        context.stroke();
+    }
+</script>
+</body>
+</html>

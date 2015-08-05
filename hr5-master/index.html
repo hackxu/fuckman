@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/swiper.min.css"/>
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css"/>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body { font-family: '华文黑体' }
+        .maro { max-width: 640px; margin: 0 auto; }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .swiper-wrapper { width: 100%; height: 100%; }
+        img {
+            width: 100%;
+        }
+        .swiper-slide { position: relative }
+
+        .swiper-slide-after { content: " "; position: absolute; width: 1.2rem; height: .9rem; margin: 0 auto; left: 0; right: 0;
+            bottom: .5rem; background: url(images/jian.png) no-repeat;
+            background-size: 100% 100%; -webkit-animation: fadeOutUp 1.5s infinite ease-in-out; z-index: 300 }
+
+        .shadow { bottom: 0; width: 100%; height: 9rem; background: #000; opacity: .6; position: absolute; }
+
+        .shadows { width: 92%; font-size: .9rem; height: 8rem; bottom: 0; position: absolute; padding: .5rem 0; margin-left: 4%; color: #eee; z-index: 8; text-indent: 1.5rem; overflow: auto; }
+
+        .sf1 { width: 70%; height:auto;
+            position: absolute; top: 4%; left:13%;
+
+            -webkit-animation:fadeInDown 1s .2s ease both;
+            -moz-animation:fadeInDown 1s .2s ease both;}
+
+
+        .sf1q{ width: 18%; height:auto; overflow: hidden; position: absolute;  top: 18%; left: 73%;;
+            -webkit-animation:rotateOut infinite 3s 3.2s linear both;
+            -moz-animation:rotateOut infinite 3s 3.2s linear both;}
+        .sf2{
+            width: 77%; height:auto;
+            position: absolute; top: 84%; left:10%;
+
+            -webkit-animation:fadeInUp 1s 1.2s ease both;
+            -moz-animation:fadeInUp 1s 1.2s ease both;}
+        .sfz{ width: 20%; height:auto;
+            position: absolute; top: 40%; right:20%;
+            -webkit-animation:rotateIn 1s 2.2s ease both;
+            -moz-animation:rotateIn 1s 2.2s ease both;}
+
+
+        .sd1 {
+            width: 54%; height:auto; position: absolute;  top: 5%; left: 10%;;
+            -webkit-animation: bounceIn 1s .2s  ease both;
+            -moz-animation: bounceIn 1s .2s ease both; }
+        .sdq {
+            width: 52%; height:auto;  position: absolute; bottom:33%; left: 37%;
+            -webkit-animation: bounceIn 1s 1.2s  ease both;
+            -moz-animation: bounceIn 1s 1.2s ease both; }
+
+        .sdw {
+            width: 52%; height:auto;  position: absolute; bottom: 0%; left: 22%;;
+            -webkit-animation: bounceIn 1s 2.2s  ease both;
+            -moz-animation: bounceIn 1s 2.2s ease both; }
+        .sd2{width: 57%; height:auto;
+            position: absolute; top: 10%; left: 10%;;
+            -webkit-animation:fadeInLeft 1s .2s ease both;
+            -moz-animation:fadeInLeft 1s .2s ease both;}
+        .sd2q{width: 57%; height:auto;
+            position: absolute; top: 45%; left: 37%;;
+            -webkit-animation:fadeInLeft 1s 1.2s ease both;
+            -moz-animation:fadeInLeft 1s 1.2s ease both;}
+        .sd3{width: 80%; height: auto;
+            position: absolute; top: 56%; left: 10%;;
+            -webkit-animation:flipInY 1s .2s ease both;
+            -moz-animation:flipInY 1s .2s ease both;}
+        .sd4{width: 50%; height: auto;
+            position: absolute; top: 8%; left: 33%;;
+            -webkit-animation:fadeInDown 1s .2s ease both;
+            -moz-animation:fadeInDown 1s .2s ease both;}
+        .sd4q{width: 93%; height: auto;
+            position: absolute; top: 68%; left: 3%;;
+            -webkit-animation:fadeInDa 1s 1.2s ease both;
+            -moz-animation:fadeInDa 1s 1.2s ease both;}
+        .sd5{width: 50%; height: auto;
+            position: absolute; top: 5%; left: 26%;;
+            -webkit-animation:fadeInDa 1s .2s ease both;
+            -moz-animation:fadeInDa 1s .2s ease both;}
+        .sd52{width: 98%; height: auto;
+            position: absolute; top:60%; left: 2%;;
+            -webkit-animation:fadeInLeft 1s 1.2s ease both;
+            -moz-animation:fadeInLeft 1s 1.2s ease both;}
+
+        @-webkit-keyframes fadeInDown{
+            0%{opacity:0;
+                -webkit-transform:translateY(-20px)}
+            100%{opacity:1;
+                -webkit-transform:translateY(0)}
+        }
+        @-moz-keyframes fadeInDown{
+            0%{opacity:0;
+                -moz-transform:translateY(-20px)}
+            100%{opacity:1;
+                -moz-transform:translateY(0)}
+        }
+        @-webkit-keyframes fadeInDa{
+            0%{opacity:0;
+                -webkit-transform:scale(.5)}
+            100%{opacity:1;
+                -webkit-transform:translateY(0.1)}
+        }
+        @-moz-keyframes fadeDa{
+            0%{opacity:0;
+                -webkit-transform:scale(.5)}
+            100%{opacity:1;
+                -webkit-transform:translateY(0.1)}
+        }
+
+        @-webkit-keyframes fadeInUp{
+            0%{opacity:0;
+                -webkit-transform:translateY(20px)}
+            100%{opacity:1;
+                -webkit-transform:translateY(0)}
+        }
+        @-moz-keyframes fadeInUp{
+            0%{opacity:0;
+                -moz-transform:translateY(20px)}
+            100%{opacity:1;
+                -moz-transform:translateY(0)}
+        }
+        @-webkit-keyframes flipInY{
+            0%{-webkit-transform:perspective(400px) rotateY(90deg);
+                opacity:0}
+            40%{-webkit-transform:perspective(400px) rotateY(-10deg)}
+            70%{-webkit-transform:perspective(400px) rotateY(10deg)}
+            100%{-webkit-transform:perspective(400px) rotateY(0deg);
+                opacity:1}
+        }
+        @-moz-keyframes flipInY{
+            0%{-moz-transform:perspective(400px) rotateY(90deg);
+                opacity:0}
+            40%{-moz-transform:perspective(400px) rotateY(-10deg)}
+            70%{-moz-transform:perspective(400px) rotateY(10deg)}
+            100%{-moz-transform:perspective(400px) rotateY(0deg);
+                opacity:1}
+        }
+        @-webkit-keyframes fadeInLeft{
+            0%{opacity:0;
+                -webkit-transform:translateX(-20px)}
+            100%{opacity:1;
+                -webkit-transform:translateX(0)}
+        }
+        @-moz-keyframes fadeInLeft{
+            0%{opacity:0;
+                -moz-transform:translateX(-20px)}
+            100%{opacity:1;
+                -moz-transform:translateX(0)}
+        }
+        @-webkit-keyframes bounceIn{
+            0%{opacity:0;
+                -webkit-transform:scale(.3)}
+            50%{opacity:1;
+                -webkit-transform:scale(1.05)}
+            70%{-webkit-transform:scale(.9)}
+            100%{-webkit-transform:scale(1)}
+        }
+        @-moz-keyframes bounceIn{
+            0%{opacity:0;
+                -moz-transform:scale(.3)}
+            50%{opacity:1;
+                -moz-transform:scale(1.05)}
+            70%{-moz-transform:scale(.9)}
+            100%{-moz-transform:scale(1)}
+        }
+        @-webkit-keyframes rotateOut{
+            0%{-webkit-transform:rotate(0);
+                opacity:1}
+            100%{-webkit-transform:rotate(-360deg);
+                opacity:1}
+        }
+        @-moz-keyframes rotateOut{
+            0%{-moz-transform:rotate(0);
+                opacity:1}
+            100%{-moz-transform:rotate(-360deg);
+                opacity:1}
+        }
+
+        @-webkit-keyframes rotateIn{
+            0%{-webkit-transform-origin:center center;
+                -webkit-transform:rotate(720deg);
+                opacity:0}
+            100%{-webkit-transform-origin:center center;
+                -webkit-transform:rotate(0);
+                opacity:1}
+        }
+        @-moz-keyframes rotateIn{
+            0%{-moz-transform-origin:center center;
+                -moz-transform:rotate(720deg);
+                opacity:0}
+            100%{-moz-transform-origin:center center;
+                -moz-transform:rotate(0);
+                opacity:1}
+        }
+        @-webkit-keyframes fadeOutUp{
+            0%{opacity:1;
+                -webkit-transform:translateY(0)}
+            100%{opacity:0;
+                -webkit-transform:translateY(-25px)}
+        }
+        @-moz-keyframes fadeOutUp{
+            0%{opacity:1;
+                -moz-transform:translateY(0)}
+            100%{opacity:0;
+                -moz-transform:translateY(-25px)}
+        }
+    </style>
+</head>
+
+<body>
+<div class="maro">
+    <div class="swiper-container" id="sw1">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="swiper-slide-after"></div>
+                <img src="images/1bg.png"  class="simg" alt=""/>
+
+                <div class="sf"><img src="images/01.png" width="100%" alt=""/></div>
+                <div class="sf1qq"><img src="images/sun.png" width="100%" alt=""/></div>
+                <div class="sf21"><img src="images/02.png" width="100%" alt=""/></div>
+                <div class="sfz1"><a href="###"><img src="images/03.png" width="100%" alt=""/></a></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="images/2bg.png" alt="" class="simg"/>
+                <div class="swiper-slide-after"></div>
+
+                <div class="sd"><img src="images/11.png" alt=""/></div>
+                <div class="sdqq"><img src="images/12.png" alt=""/></div>
+                <div class="sdww"><img src="images/13.png" alt=""/></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="images/3bg.png" class="simg"/>
+            <div class="sd21"><img src="images/21.png" alt=""/></div>
+            <div class="sd2qq"><img src="images/22.png" alt=""/></div>
+                <div class="swiper-slide-after"></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="images/4bg.png" class="simg"/>
+                <div class="sd31"><img src="images/30.png" alt=""/></div>
+                <div class="swiper-slide-after"></div>
+
+            </div>
+            <div class="swiper-slide">
+                <img src="images/5bg.png" class="simg"/>
+                <div class="sd41"><img src="images/41.png" alt=""/></div>
+                <div class="swiper-slide-after"></div>
+
+                <div class="sd42"><img src="images/42.png" alt=""/></div>
+
+            </div>
+            <div class="swiper-slide">
+                <img src="images/6bg.png" class="simg"/>
+                <div class="sd51"><img src="images/51.png" alt=""/></div>
+                <div class="swiper-slide-after"></div>
+
+                <div class="sd521"><img src="images/52.png" alt=""/></div>
+
+            </div>
+        </div>
+        <!--<div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>-->
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        $(window).load(function () {
+            $(".shadows").mCustomScrollbar();
+
+            var wHeight = $(window).height()
+                    ;
+            var s1Height = document.getElementById('sw1');
+            s1Height.style.height = wHeight + 'px';
+          $('.simg').height(wHeight);
+           // $('.simg').height = wHeight;
+            var mySwiper = new Swiper('.swiper-container', {
+                direction: 'vertical',//水平滑动
+                onInit: function (swiper) {
+                    //Swiper初始化了
+                    $('.sf').addClass('sf1');
+                    $('.sf1qq').addClass('sf1q') ;
+                    $('.sf21').addClass('sf2');
+                    $('.sfz1').addClass('sfz')
+                },
+                onSlideChangeEnd: function (swiper) {
+                    // alert('事件触发了;');
+                    if (mySwiper.activeIndex == 1) {
+                        $('.sd').addClass('sd1');
+                        $('.sdqq').addClass('sdq');
+                        $('.sdww').addClass('sdw')
+                    }
+                    ;
+                    if (mySwiper.activeIndex == 2) {
+                        $('.sd21').addClass('sd2');
+                        $('.sd2qq').addClass('sd2q');
+                       // alert('cac')
+                    }
+                    ;
+                    if (mySwiper.activeIndex == 3) {
+                        $('.sd31').addClass('sd3');                    }
+                    ;
+                    if (mySwiper.activeIndex == 4) {
+                        $('.sd41').addClass('sd4');
+                        $('.sd42').addClass('sd4q');
+                    }
+                    ;
+                    if (mySwiper.activeIndex == 5) {
+                        $('.sd51').addClass('sd5');
+                        $('.sd521').addClass('sd52');
+                    }
+                    ;
+                }/*,
+                 onTouchStart: function (swiper, even) {
+                 alert(mySwiper.activeIndex)
+                 }*/
+            })
+        });
+    })(jQuery);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas shadow</title>
+</head>
+<body>
+<canvas id="shadow" width="1000"height="500">
+
+</canvas>
+<canvas id="jianbian" width="1000" height="500">
+
+</canvas>
+<script type="text/javascript">
+    var scxt = document.getElementById('shadow').getContext('2d');
+
+    //设置阴影
+    scxt.shadowOffsetX = 5;
+    scxt.shadowOffsetY = 5;
+    scxt.shadowBlur =4;
+    scxt.shadowColor = "rgba(0,0,0,0.5)";
+
+    //绘制红色矩形
+    scxt.fillStyle = "#ff0000";
+    scxt.fillRect(10,10,50,50);
+
+    //绘制蓝色矩形
+    scxt.fillStyle = "rgba(0,0,255,0.5)";
+    scxt.fillRect(30,30,50,50);
+
+    var jcxt = document.getElementById('jianbian').getContext("2d");
+    jcxt.fillStyle = "#ff0000";
+    jcxt.fillRect(0,0,50,50);
+
+    var gradient = jcxt.createLinearGradient(30,30,70,70);
+    gradient.addColorStop(0,"white");
+    gradient.addColorStop(1,"black");
+    jcxt.fillStyle = gradient;
+    jcxt.fillRect(30,30,50,50);
+    //函数方法
+    function createRecLinearGradienta (context,x,y,width,height){
+        return context.createLinearGradient(x,y,x+width,y+height);
+    }
+    var gradienta = createRecLinearGradienta(jcxt,100,100,50,50);
+
+    gradienta.addColorStop(0,"white");
+    gradienta.addColorStop(1,"red");
+
+    jcxt.fillStyle = gradienta;
+    jcxt.fillRect(100,100,50,50);
+
+
+    var gradientb = createRecLinearGradienta(jcxt,330,330,10,50,50,30);
+    gradientb.addColorStop(0,'white');
+    gradientb.addColorStop(1,"black");
+
+    //绘制红色矩形
+    jcxt.fillStyle = "#ff0000";
+    jcxt.fillRect(300,300,50,50);
+    //绘制渐变矩形
+    jcxt.fillStyle = gradientb;
+    jcxt.fillRect(330,330,50,50)
+</script>
+</body>
+</html>

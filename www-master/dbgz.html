@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>一元夺宝规则</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .dbimg{width: 100%; height: auto; overflow: hidden;}
+        .dbimg img {width: 100%; border: 0;}
+        /*.top{margin-top: -5px;}*/
+        #db-more{max-width: 640px; height: auto; overflow: hidden;margin: 0 auto;}
+    </style>
+</head>
+<body>
+<div id="db-more">
+<div class="dbimg"><img src="images/m1.jpg" id="dbimg" alt=""/></div>
+<!--<div class="dbimg top"><img src="images/m3.jpg" alt=""/></div>-->
+<!--<div class="dbimg top"><img src="images/m2.jpg" alt=""/></div>-->
+</div>
+<script>
+    var wHeight = document.documentElement.clientHeight;
+    var dbimg = document.getElementById('dbimg');
+    dbimg.style.height = wHeight + 'px';
+</script>
+</body>
+</html>

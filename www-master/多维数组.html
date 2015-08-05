@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>多维数组</title>
+</head>
+<body>
+<script>
+    var table = new Array(10);
+    for(var i = 0;i<table.length;i++)
+        table[i] = new Array(10);
+        for(var row = 0;row <table.length; row++){
+            for(col = 0;col <table[row].length;col++){
+                table[row][col] = row*col;
+            }
+        }
+    var produt = table[5][7];
+    alert(produt);
+</script>
+</body>
+</html>
